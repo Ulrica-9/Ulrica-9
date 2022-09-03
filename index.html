@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 3000px;
+        }
+
+        .aside {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .item {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: red;
+            color: #fff;
+        }
+
+        .content {
+            width: 660px;
+            margin: 400px auto;
+        }
+
+        .neirong {
+            height: 300px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .content1 {
+            background-color: red;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            text-decoration: solid;
+        }
+
+        .content2 {
+            background-color: blue;
+            text-align: center;
+            line-height: 75px;
+            font-size: 20px;
+            text-decoration: solid;
+        }
+
+        .content3 {
+            background-color: orange;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            text-decoration: solid;
+        }
+
+        .content4 {
+            background-color: yellowgreen;
+        }
+        div img{
+            width: 660px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="aside">
+        <div class="item active">自我介绍</div>
+        <div class="item">别看了</div>
+        <div class="item">记事本乱写的</div>
+        <div class="item">真的不会写，全是乱写的</div>
+    </div>
+
+    <div class="content">
+        <div class="neirong content1">罗<p>天<p>宇</div>
+        <div class="neirong content2">男，今年20岁了</div>
+        <div class="neirong content3">兴趣爱好: 没什么特别喜欢的，也没什么特别讨厌的。</div>
+        <div class="neirong content4">
+            <img src="./1.jpg" alt="">
+        </div>
+    </div>
+
+    <script>
+        let aside = document.querySelector('.aside')
+        let content = document.querySelector('.content')
+        // 进行挨个绑定事件
+        // 1.添加的是 点击事件
+        // 2.利用滚动事件的可变性 进行改变
+        // 3.因为三大家族中的offsetTop可获取当前盒子离顶部的距离
+        for(let i =0;i<aside.children.length;i++){
+            aside.children[i].addEventListener('click',function () {
+                // 去除一个css属性
+                // classList.add('test');  添加 classList.remove 移除
+                // for(let j =0;j<aside.children.length;j++){
+                //     aside.children[j].classList.remove('active')
+                // }
+                // 方法二 移除
+                document.querySelector('.aside .active').classList.remove('active')
+                // 排他思想 干掉所有人 复活我自己
+                this.classList.add('active')
+
+                // 进行跳转 设置页面的开始位置 利用页面距离进行跳转
+                document.documentElement.scrollTop = content.children[i].offsetTop
+            })
+        }
+    </script>
+</body>
+
+</html>
